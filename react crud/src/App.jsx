@@ -27,7 +27,7 @@ function App() {
                 <NavLink to="/prodi" className="nav-link">Program Studi</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/mhs" className="nav-link">Mahasiswa</NavLink>
+                <NavLink to="/mahasiswa" className="nav-link">Mahasiswa</NavLink>
               </li>
             </ul>
           </div>
@@ -37,7 +37,7 @@ function App() {
         <Route path="/" element={< Home />} />
         <Route path="/fakultas" element={< FakultasList />} />
         <Route path="/prodi" element={< ProdiList />} />
-        <Route path="/mhs" element={< MhsList />} />
+        <Route path="/mahasiswa" element={< MhsList />} />
       </Routes>
     </Router>
   )
