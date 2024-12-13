@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
+import { NavLink } from "react-router-dom";
 export default function List(){
     const [prodi, setProdi] = useState([]);
     useEffect(() => {
@@ -12,30 +13,31 @@ export default function List(){
     }, [])
 
     return (
-        <>
-            <h2>List Program Studi</h2>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>Nama Prodi</th>
-                        <th>Singkatan</th>
-                        <th>Kaprodi</th>
-                        <th>Fakultas</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    {prodi.map((data) => (
-                        <tr key={data.id}>
-                            <td>{data.nama}</td>
-                            <td>{data.singkatan}</td>
-                            <td>{data.kaprodi}</td>
-                            <td>{data.fakultas.nama}</td>
-                        </tr>
-                    ))}
-
-                </tbody>
-            </table>
-        </>
-    )
+      <>
+        <h2>List Program Studi</h2>
+        <NavLink to="/prodi/create" className="btn btn-primary mb-3">
+          Tambah
+        </NavLink>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Nama Prodi</th>
+              <th>Kaprodi</th>
+              <th>Singkatan</th>
+              <th>Fakultas</th>
+            </tr>
+          </thead>
+          <tbody>
+            {prodi.map((data) => (
+              <tr key={data.id}>
+                <td>{data.nama}</td>
+                <td>{data.kaprodi}</td>
+                <td>{data.singkatan}</td>
+                <td>{data.fakultas.nama}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
+    );
 }

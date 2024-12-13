@@ -8,6 +8,7 @@ export default function CreateProdi() {
   const [namaProdi, setNamaProdi] = useState("");
   // Inisialisasi state untuk menyimpan ID fakultas yang dipilih
   const [kaprodi, setKaprodi] = useState("");
+  const [singkatan, setSingkatan] = useState("");
   const [fakultasId, setFakultasId] = useState("");
   // Inisialisasi state untuk menyimpan daftar fakultas
   const [fakultasList, setFakultasList] = useState([]);
@@ -21,11 +22,11 @@ export default function CreateProdi() {
     const fetchFakultas = async () => {
       try {
         const response = await axios.get(
-          "https://academic-mi5a.vercel.app/api/api/prodi"
+          "https://academic-mi5a.vercel.app/api/api/fakultas"
         );
-        setFakultasList(response.data.result); // Simpan data fakultas ke dalam state
+        setFakultasList(response.data.data); // Simpan data fakultas ke dalam state
       } catch (error) {
-        setError("Failed to fetch prodi data");
+        setError("Failed to fetch fakultas data");
       }
     };
 
@@ -43,18 +44,23 @@ export default function CreateProdi() {
       setError("Nama Prodi and Fakultas are required"); // Set pesan error jika input kosong
       return; // Stop eksekusi fungsi jika input tidak valid
     }
-
     if (kaprodi.trim() === "") {
       setError("Nama Kaprodi are required"); // Set pesan error jika input kosong
+      return; // Stop eksekusi fungsi jika input tidak valid
+    }
+    if (singkatan.trim() === "") {
+      setError("Singkatan are required"); // Set pesan error jika input kosong
       return; // Stop eksekusi fungsi jika input tidak valid
     }
 
     try {
       // Melakukan HTTP POST request untuk menyimpan data prodi
       const response = await axios.post(
-        "https://project-apiif-3-b.vercel.app/api/api/prodi", // Endpoint API yang dituju
+        "https://academic-mi5a.vercel.app/api/api/prodi", // Endpoint API yang dituju
         {
           nama: namaProdi, // Data nama prodi
+          kaprodi: kaprodi,
+          singkatan: singkatan,
           fakultas_id: fakultasId, // Data ID fakultas yang dipilih
         }
       );
@@ -64,6 +70,8 @@ export default function CreateProdi() {
         // Tampilkan pesan sukses jika prodi berhasil dibuat
         setSuccess("Prodi created successfully!");
         setNamaProdi(""); // Kosongkan input form setelah sukses submit
+        setKaprodi("");
+        setSingkatan("");
         setFakultasId(""); // Kosongkan dropdown setelah sukses submit
       } else {
         // Jika tidak berhasil, tampilkan pesan error
@@ -95,6 +103,30 @@ export default function CreateProdi() {
             value={namaProdi} // Nilai input disimpan di state namaProdi
             onChange={(e) => setNamaProdi(e.target.value)} // Update state saat input berubah
             placeholder="Enter Prodi Name" // Placeholder teks untuk input
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Nama Kaprodi</label>
+          {/* Input untuk nama prodi dengan class bootstrap */}
+          <input
+            type="text"
+            className="form-control"
+            id="kaprodi"
+            value={kaprodi} // Nilai input disimpan di state namaProdi
+            onChange={(e) => setKaprodi(e.target.value)} // Update state saat input berubah
+            placeholder="Enter Kaprodi Name" // Placeholder teks untuk input
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Singkatan</label>
+          {/* Input untuk nama prodi dengan class bootstrap */}
+          <input
+            type="text"
+            className="form-control"
+            id="singkatan"
+            value={singkatan} // Nilai input disimpan di state namaProdi
+            onChange={(e) => setSingkatan(e.target.value)} // Update state saat input berubah
+            placeholder="Enter Singkatan" // Placeholder teks untuk input
           />
         </div>
         <div className="mb-3">

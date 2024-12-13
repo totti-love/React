@@ -1,5 +1,6 @@
- import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import axios from "axios"
+import { NavLink } from "react-router-dom";
 export default function List() {
     const [mahasiswa, setMahasiswa] = useState([]);
     useEffect(() => {
@@ -14,6 +15,10 @@ export default function List() {
     return (
       <>
         <h2>List Mahasiswa</h2>
+                <NavLink to="/mahasiswa/create" className="btn btn-primary mb-3">
+                  Tambah
+                </NavLink>
+
         <table className="table">
           <thead>
             <tr>

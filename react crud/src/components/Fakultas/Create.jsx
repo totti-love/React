@@ -42,7 +42,6 @@ export default function CreateFakultas() {
           nama: namaFakultas, // Data yang dikirim berupa objek JSON dengan properti 'nama'
           dekan: dekan,
           singkatan: singkatan
-
         }
       );
 

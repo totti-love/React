@@ -19,7 +19,7 @@ export default function List() {
     <>
       <h2>List Fakultas</h2>
       <NavLink to="/fakultas/create" className="btn btn-primary mb-3">
-        Create
+        Tambah
       </NavLink>
 
       <table className="table">
