@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, NavLink } from "react-router-do
 const Home = React.lazy(() => import("./components/Home"))
 const FakultasList = React.lazy(() => import("./components/Fakultas/List"))
 const FakultasCreate = React.lazy(() => import("./components/Fakultas/Create"))
+const FakultasEdit = React.lazy(() => import("./components/Fakultas/Edit"))
 const ProdiList = React.lazy(() => import("./components/Prodi/List"))
 const ProdiCreate = React.lazy(() => import("./components/Prodi/Create"))
 const MhsList = React.lazy(() => import("./components/Mahasiswa/List"))
@@ -58,6 +59,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/fakultas" element={<FakultasList />} />
         <Route path="/fakultas/create" element={<FakultasCreate />} />
+        <Route path="/fakultas/edit/:id" element={<FakultasEdit />} />
         <Route path="/prodi" element={<ProdiList />} />
         <Route path="/prodi/create" element={<ProdiCreate />} />
         <Route path="/mahasiswa" element={<MhsList />} />
