@@ -1,5 +1,8 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, NavLink } from "react-router-dom";
+
+//import ProtectedRoute from "./components/ProtectedRoute"; // ProtectedRoute Component
+import Logout from "./components/Logout";
 
 const Home = React.lazy(() => import("./components/Home"))
 const FakultasList = React.lazy(() => import("./components/Fakultas/List"))
@@ -7,9 +10,13 @@ const FakultasCreate = React.lazy(() => import("./components/Fakultas/Create"))
 const FakultasEdit = React.lazy(() => import("./components/Fakultas/Edit"))
 const ProdiList = React.lazy(() => import("./components/Prodi/List"))
 const ProdiCreate = React.lazy(() => import("./components/Prodi/Create"))
+const ProdiEdit = React.lazy(() => import("./components/Prodi/Edit"))
 const MhsList = React.lazy(() => import("./components/Mahasiswa/List"))
 const MhsCreate = React.lazy(() => import("./components/Mahasiswa/Create"));
-function App() {
+
+const Login = React.lazy(() => import("./components/Login"));
+const App = () => {
+  const [token, setToken] = useState(localStorage.getItem("authToken")); // Ambil token dari localStorage
 
   return (
     <Router>
@@ -51,17 +58,31 @@ function App() {
                   Mahasiswa
                 </NavLink>
               </li>
+              <li>
+                {token ? ( // Tampilkan Logout jika token ada
+                  <NavLink className="nav-link" to="/logout">
+                    Logout
+                  </NavLink>
+                ) : (
+                  <NavLink className="nav-link" to="/login">
+                    Login
+                  </NavLink>
+                )}
+              </li>
             </ul>
           </div>
         </div>
       </nav>
       <Routes>
+        <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route path="/logout" element={<Logout />} />
         <Route path="/" element={<Home />} />
         <Route path="/fakultas" element={<FakultasList />} />
         <Route path="/fakultas/create" element={<FakultasCreate />} />
         <Route path="/fakultas/edit/:id" element={<FakultasEdit />} />
         <Route path="/prodi" element={<ProdiList />} />
         <Route path="/prodi/create" element={<ProdiCreate />} />
+        <Route path="/prodi/edit/:id" element={<ProdiEdit />} />
         <Route path="/mahasiswa" element={<MhsList />} />
         <Route path="/mahasiswa/create" element={<MhsCreate />} />
       </Routes>

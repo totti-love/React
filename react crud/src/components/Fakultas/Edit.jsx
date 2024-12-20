@@ -44,7 +44,7 @@ export default function Edit() {
   const handleSubmit = (e) => {
     e.preventDefault();  // Mencegah reload halaman saat form disubmit
     axios
-      .put(`https://academic-mi5a.vercel.app/api/api/fakultas/${id}`, { nama })  // Mengirimkan request PATCH untuk mengupdate data fakultas berdasarkan ID
+      .put(`https://academic-mi5a.vercel.app/api/api/fakultas/${id}`, { nama, dekan, singkatan })  // Mengirimkan request PATCH untuk mengupdate data fakultas berdasarkan ID
       .then((response) => {
         navigate("/fakultas");  // Jika update berhasil, navigasi kembali ke halaman list fakultas
       })
